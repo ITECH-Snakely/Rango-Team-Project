@@ -7,7 +7,7 @@
 
 {% block body_block %}
 <h1>Rango says...</h1>
-<div>
+<div id=greenmark>
     {% if user.is_authenticated %}
         howdy {{ user.username }}!
     {% else %}
@@ -17,7 +17,7 @@
     <strong>{{ boldmessage }}</strong><br />
 </div>
 
-<div>
+<div class=blocklist1>
     <h2>Most Liked Categories</h2>
 {% if categories %}
     <ul>
@@ -30,7 +30,7 @@
 {% endif %}
 </div>
 
-<div>
+<div class=blocklist2>
     <h2>Most Viewed Pages</h2>
 {% if pages %}
     <ul>
