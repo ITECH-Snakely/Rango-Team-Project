@@ -127,3 +127,26 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
     margin: 10px auto 10px auto;
     padding: 10px 1px 2px 1px
 }
+
+
+/* Profile View */
+.parent {
+    margin: 1rem;
+    text-align: center;
+  }
+  .child {
+    display: inline-block;
+    padding: 20px;
+    vertical-align: middle;
+  }
+
+.profile{
+    background-color: transparent;
+    text-align: left;
+
+}
+
+.profile:hover{
+    background-color:transparent;
+    color:#333333;
+}

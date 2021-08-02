@@ -28,7 +28,7 @@
             <div class=footer>
                 <ul>
                 {% if user.is_authenticated %}
-                    <li class=footer><a href="{% url 'rango:restricted' %}" class=footer>Restricted Page</a></li>
+                    <li class=footer><a href="{% url 'rango:profile' %}" class=footer>Profile</a></li>
                     <li class=footer><a href="{% url 'rango:logout' %}" class=footer>Logout</a></li>
                     <li class=footer><a href="{% url 'rango:add_category' %}" class=footer>Add a New Category</a></li>
                 {% else %}
