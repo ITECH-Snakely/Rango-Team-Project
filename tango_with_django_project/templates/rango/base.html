@@ -11,6 +11,7 @@
                 How to Tango with Django!
             {% endblock %}
         </title>
+        <link rel="stylesheet" href="{% static '/css/layout.css' %}">
     </head>
     <body>
         <div id=page>
@@ -18,7 +19,7 @@
             {% block body_block %}
             {% endblock %}
             </div>
-            <div class = footer> <!-- Sidebar block added. DM -->
+            <div> <!-- Sidebar block added. DM -->
                 {% block sidebar_block %}
                     {% get_category_list category %}
                 {% endblock %}

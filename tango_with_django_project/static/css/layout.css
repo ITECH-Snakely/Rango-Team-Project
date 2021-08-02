@@ -80,11 +80,50 @@ a.footer{
     transition: 0.4s;
 }
 
+a.footer:visited{
+    color:#75B2AD
+}
+
 a:hover{
     opacity: 0.6;
 }
 
+a:visited{
+    color:#333333
+}
+
 hr {
     border-top: 1px solid #333333;
-    opacity: 0.5;
+    opacity: 0.5f;
   }
+
+div.footer{
+    display: inline;
+    background-color: transparent;
+    color: #333333;
+}
+
+
+/* Login Code */
+
+form{
+    margin: 60px auto 0px auto;
+}
+
+input[type= "submit"]{
+ color: white;
+ font-weight:400;
+ letter-spacing: 3px;
+ text-transform: uppercase;
+ background-color: #75B2AD;
+ border-color: transparent;
+ padding: 10px 80px 10px 60px;
+ margin: 20px 20px 20px 0px;
+ border-radius: 2px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="url"] {
+    border-color: transparent;
+    margin: 10px auto 10px auto;
+    padding: 10px 1px 2px 1px
+}
