@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.setti
 
 import django
 django.setup()
-from rango.models import Category, Page
+from rango.models import Category, Page, Video
 
 # For an explanation of what is going on here, please refer to the TwD book.
 
@@ -38,14 +38,35 @@ def populate():
          'url':'http://flask.pocoo.org',
          'views': 64} ]
     
-    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64},
-            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
-            'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
+    python_videos = [
+        {'title':'Python for Beginners - Learn Python in 1 Hour',
+         'url':'https://www.youtube.com/embed/watch?v=kqtD5dpn9C8',
+         'views': 13},
+        {'title':'Intermediate Python Programming Course',
+         'url':'https://www.youtube.com/embed/watch?v=HGOBQPFzWKo',
+         'views': 9} ]
+    
+    django_videos = [
+        {'title':'Python for Beginners - Learn Python in 1 Hour',
+         'url':'https://www.youtube.com/embed/watch?v=kqtD5dpn9C8',
+         'views': 13},
+        {'title':'Intermediate Python Programming Course',
+         'url':'https://www.youtube.com/embed/watch?v=HGOBQPFzWKo',
+         'views': 9} ]
+
+
+    
+    cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64, 'videos': python_videos, 'vidviews': 128, 'vidlikes': 64},
+            'Django': {'pages': django_pages, 'views': 64, 'likes': 32, 'videos': django_videos, 'vidviews': 128, 'vidlikes': 64},
+            #'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
+    }
     
     for cat, cat_data in cats.items():
         c = add_cat(cat, views=cat_data['views'], likes=cat_data['likes'])
         for p in cat_data['pages']:
             add_page(c, p['title'], p['url'], views=p['views'])
+        for x in cat_data['videos']:
+            add_video(c, x['title'], x['url'], views=x['views'])
     
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
@@ -53,6 +74,13 @@ def populate():
 
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
+    p.url=url
+    p.views=views
+    p.save()
+    return p
+
+def add_video(cat, title, url, views=0):
+    p = Video.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
     p.views=views
     p.save()

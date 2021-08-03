@@ -1,11 +1,14 @@
+from django.views import View
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, Page, UserProfile
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from django.contrib.auth.models import User
+from rango.models import Category, Page, Video, UserProfile
+from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
+import json
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -35,11 +38,14 @@ def show_category(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
+        videos = Video.objects.filter(category=category) #added
 
         context_dict['pages'] = pages
+        context_dict['videos'] = videos #added
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['pages'] = None
+        context_dict['videos'] = None
         context_dict['category'] = None
     
     return render(request, 'rango/category.html', context=context_dict)
@@ -56,7 +62,6 @@ def add_category(request):
             return redirect(reverse('rango:index'))
         else:
             print(form.errors)
-    
     return render(request, 'rango/add_category.html', {'form': form})
 
 @login_required
@@ -88,6 +93,36 @@ def add_page(request, category_name_slug):
     
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
+
+@login_required
+def add_video(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except:
+        category = None
+    
+    # You cannot add a page to a Category that does not exist... DM
+    if category is None:
+        return redirect(reverse('rango:index'))
+
+    form = VideoForm()
+
+    if request.method == 'POST':
+        form = VideoForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                video = form.save(commit=False)
+                video.category = category
+                video.views = 0
+                video.save()
+
+                return redirect(reverse('rango:show_category', kwargs={'category_name_slug': category_name_slug}))
+        else:
+            print(form.errors)  # This could be better done; for the purposes of TwD, this is fine. DM.
+    
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_video.html', context=context_dict)
 
 def register(request):
     registered = False
@@ -137,6 +172,10 @@ def user_login(request):
         return render(request, 'rango/login.html')
 
 @login_required
+def profile(request):
+    return render(request, 'rango/profile.html')
+
+@login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
 
@@ -164,9 +203,85 @@ def visitor_cookie_handler(request):
     
     request.session['visits'] = visits
 
-@login_required
-def profile(request):
+class LikeCategoryView(View):
+    def get(self, request):
+        category_id = request.GET['category_id']
 
+        try:
+            category = Category.objects.get(id=int(category_id))
+        except Category.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+        
+        
+        user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+        allCategories = user_profile.cats.all()
+
+        dislikeFlag = 0
+        likeFlag = 0
+        for cat in allCategories.iterator():
+            if cat.name == category.name and cat.likeDislikeDefault == 1:
+                likeFlag = 1
+                break
+            elif cat.name == category.name and cat.likeDislikeDefault == -1:
+                dislikeFlag = 1
+                break     
+
+
+        if dislikeFlag: 
+            category.dislikes = category.dislikes - 1
+            category.save()
+            
+        if not likeFlag:
+            category.likeDislikeDefault = 1
+            category.likes = category.likes + 1
+            category.save()
+            user_profile.cats.add(category)
+
+        data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
+
+        return HttpResponse(json.dumps(data_details)) 
+
+class DislikeCategoryView(View):
+    def get(self, request):
+        category_id = request.GET['category_id']
+
+        try:
+            category = Category.objects.get(id=int(category_id))
+        except Category.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+        
+        user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+        allCategories = user_profile.cats.all()
+
+        dislikeFlag = 0
+        likeFlag = 0
+        for cat in allCategories.iterator():
+            if cat.name == category.name and cat.likeDislikeDefault == -1:
+                dislikeFlag = 1
+                break
+            elif cat.name == category.name and cat.likeDislikeDefault == 1:
+                likeFlag = 1
+                break
+
+        if likeFlag:
+            category.likes = category.likes - 1
+            category.save()
+
+        if not dislikeFlag:
+            category.likeDislikeDefault = -1
+            category.dislikes = category.dislikes + 1
+            category.save()
+            user_profile.cats.add(category)
+
+        data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
+
+        return HttpResponse(json.dumps(data_details)) 
+
+def profile(request):
     current_user = request.user
     number_user = current_user.id-1
     email_user = current_user.email
@@ -185,5 +300,4 @@ def profile(request):
 
 @login_required
 def settings(request):
-
     return render(request, 'rango/settings.html')
