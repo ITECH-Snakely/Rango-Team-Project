@@ -24,8 +24,18 @@
 
     {% if user.is_authenticated %}
     <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> <br />
+    <a href="{% url 'rango:add_video' category.slug %}">Add Video</a> <br />
     {% endif %}
     {% else %}
     The specified category does not exist.
     {% endif %}
+
+    <div>
+        <ul>
+            {% for video in videos %}
+            <iframe width="280" height="157.5" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
