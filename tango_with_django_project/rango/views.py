@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, Page
+from rango.models import Category, Page, UserProfile
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 
@@ -167,4 +167,23 @@ def visitor_cookie_handler(request):
 @login_required
 def profile(request):
 
-    return render(request, 'rango/profile.html')
+    current_user = request.user
+    number_user = current_user.id-1
+    email_user = current_user.email
+
+    obj = UserProfile.objects.get(id=number_user)
+    context = {
+    'name': obj.user,
+    'id': obj.id,
+    'email': obj.email,
+    'website': obj.website,
+    'picture': obj.picture,
+    }
+
+    return render(request, 'rango/profile.html', context= context)
+
+
+@login_required
+def settings(request):
+
+    return render(request, 'rango/settings.html')

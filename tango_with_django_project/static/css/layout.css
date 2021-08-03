@@ -67,6 +67,8 @@ a:link {
     color:#75B2AD;
 }
 
+/*Footer Setting*/
+
 li.footer{
     display: inline;
     color:#75B2AD;
@@ -97,10 +99,13 @@ hr {
     opacity: 0.5f;
   }
 
-div.footer{
+.cat li{
     display: inline;
     background-color: transparent;
-    color: #333333;
+    color:#75B2AD;
+    color:#333333;
+    color:#F5F5F5;
+    font-weight: bold;
 }
 
 
@@ -120,12 +125,15 @@ input[type= "submit"]{
  padding: 10px 80px 10px 60px;
  margin: 20px 20px 20px 0px;
  border-radius: 2px;
+ text-align: center;
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="url"] {
     border-color: transparent;
     margin: 10px auto 10px auto;
-    padding: 10px 1px 2px 1px
+    padding: 6px 1px 2px 1px;
+    font-size: 18px;
+    vertical-align: middle;
 }
 
 
@@ -138,6 +146,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
     display: inline-block;
     padding: 20px;
     vertical-align: middle;
+    
   }
 
 .profile{
@@ -149,4 +158,33 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
 .profile:hover{
     background-color:transparent;
     color:#333333;
+} 
+
+
+.titleCon{
+    margin-bottom: -20px;
+}
+
+.loginText{
+    color: #333333;
+    opacity: 0.5;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.deleteButton{
+    padding: 10px;
+    margin: 0px 10px 100px 0px;
+    background-color: #bb1a1a;
+    color:#F5F5F5;
+    width: 265px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.profilePIC {
+    width: 260px;
+    height: 260px;
+    border-radius: 6px;
 }

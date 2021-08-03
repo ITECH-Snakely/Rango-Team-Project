@@ -6,18 +6,18 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Profile</h1>
+<h1 class = titleCon>Profile</h1>
 <h1 id=greenmark> Settings </h1>
 <div class='parent'>
     <div class='child'>
-        <img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" width= "250" height = "250" />
+        <img class= profilePIC src="{{ MEDIA_URL }}{{ picture }}" alt="Profile Picture" />
     </div>
     <div class='child'>
         <ul>
-            <li class=profile> Username: {{ user.username }} </li>
-            <li class=profile> Email:  {{ user.email }} </li>
-            <li class=profile> Website: {{ user.website }} </li>
-            <li> SETTINGS </li>
+            <li class=profile> Username: {{ name }} </li>
+            <li class=profile> Email: {{ email }} </li>
+            <li class=profile> Website: {{ website }} </li>
+            <li> <a href = ../profile/settings/> SETTINGS </a> </li>
         </ul>
     </div>
   </div>
