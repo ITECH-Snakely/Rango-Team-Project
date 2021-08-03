@@ -33,7 +33,7 @@ class Page(models.Model):
         return self.title
 
 class Video(models.Model):
-    TITLE_MAX_LENGTH = 128
+    TITLE_MAX_LENGTH = 300
     URL_MAX_LENGTH = 200
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

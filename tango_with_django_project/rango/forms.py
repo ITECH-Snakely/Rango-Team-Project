@@ -46,8 +46,8 @@ class UserProfileForm(forms.ModelForm):
         fields = ('website', 'picture',)
 
 class VideoForm(forms.ModelForm):
-    title = forms.CharField(max_length=Page.TITLE_MAX_LENGTH, help_text="Please enter the title of the video.")
-    url = forms.URLField(max_length=200, help_text="Please enter the URL of the video.")
+    title = forms.CharField(max_length=Video.TITLE_MAX_LENGTH, help_text="Please enter the title of the video.")
+    url = forms.URLField(max_length=300, help_text="Please enter the URL of the video.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
     class Meta:
@@ -58,8 +58,20 @@ class VideoForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
 
-        if url and not url.startswith('http://'):
+        string = str(url)
+        stringList = string.split('.com/')
+
+        string2 = stringList[0] + ".com/embed/" + stringList[1]
+        url = string2
+        print(url)
+        cleaned_data['url'] = url
+
+        if url and not url.startswith(('http://') or ('https://')):
             url = f'http://{url}'
-            cleaned_data['url'] = url
-        
+            cleaned_data['url'] = url 
+
         return cleaned_data
+
+        
+        
+       
