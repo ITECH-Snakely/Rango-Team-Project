@@ -5,8 +5,8 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from rango.models import Category, Page, UserProfile
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from rango.models import Category, Page, Video, UserProfile
+from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
 import json
 
@@ -38,11 +38,14 @@ def show_category(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
+        videos = Video.objects.filter(category=category) #added
 
         context_dict['pages'] = pages
+        context_dict['videos'] = videos #added
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['pages'] = None
+        context_dict['videos'] = None
         context_dict['category'] = None
     
     return render(request, 'rango/category.html', context=context_dict)
@@ -91,6 +94,36 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
+@login_required
+def add_video(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except:
+        category = None
+    
+    # You cannot add a page to a Category that does not exist... DM
+    if category is None:
+        return redirect(reverse('rango:index'))
+
+    form = VideoForm()
+
+    if request.method == 'POST':
+        form = VideoForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                video = form.save(commit=False)
+                video.category = category
+                video.views = 0
+                video.save()
+
+                return redirect(reverse('rango:show_category', kwargs={'category_name_slug': category_name_slug}))
+        else:
+            print(form.errors)  # This could be better done; for the purposes of TwD, this is fine. DM.
+    
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_video.html', context=context_dict)
+
 def register(request):
     registered = False
 
@@ -138,6 +171,10 @@ def user_login(request):
     else:
         return render(request, 'rango/login.html')
 
+@login_required
+def profile(request):
+    return render(request, 'rango/profile.html')
+    
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
@@ -242,13 +279,6 @@ class DislikeCategoryView(View):
 
         data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
 
-        return HttpResponse(json.dumps(data_details))
+        return HttpResponse(json.dumps(data_details)) 
 
-
-        
-        
-        
-
-        
-
-    
+0

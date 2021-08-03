@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from rango.models import Page, Category, UserProfile
+from rango.models import Page, Category, UserProfile, Video
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 
@@ -46,3 +46,34 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('website', 'picture',)
+
+class VideoForm(forms.ModelForm):
+    title = forms.CharField(max_length=Video.TITLE_MAX_LENGTH, help_text="Please enter the title of the video.")
+    url = forms.URLField(max_length=300, help_text="Please enter the URL of the video.")
+    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+
+    class Meta:
+        model = Video
+        exclude = ('category',)
+    
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        url = cleaned_data.get('url')
+
+        string = str(url)
+        stringList = string.split('.com/')
+
+        string2 = stringList[0] + ".com/embed/" + stringList[1]
+        url = string2
+        print(url)
+        cleaned_data['url'] = url
+
+        if url and not url.startswith(('http://') or ('https://')):
+            url = f'http://{url}'
+            cleaned_data['url'] = url 
+
+        return cleaned_data
+
+        
+        
+       

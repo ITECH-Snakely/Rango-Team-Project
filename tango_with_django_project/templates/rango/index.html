@@ -7,7 +7,7 @@
 
 {% block body_block %}
 <h1>Rango says...</h1>
-<div>
+<div id=greenmark>
     {% if user.is_authenticated %}
         howdy {{ user.username }}!
     {% else %}
@@ -18,6 +18,12 @@
 </div>
 
 <div>
+    
+</div>
+    <script async src="https://cse.google.com/cse.js?cx=41788f5810073ee7d"></script>
+    <div class="gcse-search"></div> 
+<div>
+<div class=blocklist1>
     <h2>Most Liked Categories</h2>
 {% if categories %}
     <ul>
@@ -30,7 +36,7 @@
 {% endif %}
 </div>
 
-<div>
+<div class=blocklist2>
     <h2>Most Viewed Pages</h2>
 {% if pages %}
     <ul>
