@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-    <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> <br />
+    <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> 
     <a href="{% url 'rango:add_video' category.slug %}">Add Video</a> <br />
     {% endif %}
     {% else %}
