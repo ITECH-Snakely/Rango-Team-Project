@@ -11,7 +11,27 @@
 
 {% block body_block %}
     {% if category %}
-    <h1>{{ category.name }}</h1>
+    <h1>{{ category.name }}</h1> <br />
+    <div>
+        <strong id="like_count">{{ category.likes }}</strong> likes
+        {% if user.is_authenticated %}
+            <button id="like_btn"
+                likeData-categoryid="{{ category.id }}"
+                class="btn btn-primary btn-sm"
+                type="button">
+                Like Category
+            </button>
+        {% endif %}
+        <strong id="dislike_count">{{ category.dislikes }}</strong> dislikes
+        {% if user.is_authenticated %}
+            <button id="dislike_btn"
+                dislikeData-categoryid="{{ category.id }}"
+                class="btn btn-primary btn-sm"
+                type="button">
+                Dislike Category
+            </button>
+        {% endif %}
+    </div>
     {% if pages %}
     <ul>
         {% for page in pages %}

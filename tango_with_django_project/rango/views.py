@@ -1,11 +1,14 @@
+from django.views import View
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Category, Page
+from django.contrib.auth.models import User
+from rango.models import Category, Page, UserProfile
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
+import json
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -56,7 +59,6 @@ def add_category(request):
             return redirect(reverse('rango:index'))
         else:
             print(form.errors)
-    
     return render(request, 'rango/add_category.html', {'form': form})
 
 @login_required
@@ -163,3 +165,90 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
     
     request.session['visits'] = visits
+
+class LikeCategoryView(View):
+    def get(self, request):
+        category_id = request.GET['category_id']
+
+        try:
+            category = Category.objects.get(id=int(category_id))
+        except Category.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+        
+        
+        user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+        allCategories = user_profile.cats.all()
+
+        dislikeFlag = 0
+        likeFlag = 0
+        for cat in allCategories.iterator():
+            if cat.name == category.name and cat.likeDislikeDefault == 1:
+                likeFlag = 1
+                break
+            elif cat.name == category.name and cat.likeDislikeDefault == -1:
+                dislikeFlag = 1
+                break     
+
+
+        if dislikeFlag: 
+            category.dislikes = category.dislikes - 1
+            category.save()
+            
+        if not likeFlag:
+            category.likeDislikeDefault = 1
+            category.likes = category.likes + 1
+            category.save()
+            user_profile.cats.add(category)
+
+        data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
+
+        return HttpResponse(json.dumps(data_details)) 
+
+class DislikeCategoryView(View):
+    def get(self, request):
+        category_id = request.GET['category_id']
+
+        try:
+            category = Category.objects.get(id=int(category_id))
+        except Category.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+        
+        user_profile = UserProfile.objects.get_or_create(user=request.user)[0]
+        allCategories = user_profile.cats.all()
+
+        dislikeFlag = 0
+        likeFlag = 0
+        for cat in allCategories.iterator():
+            if cat.name == category.name and cat.likeDislikeDefault == -1:
+                dislikeFlag = 1
+                break
+            elif cat.name == category.name and cat.likeDislikeDefault == 1:
+                likeFlag = 1
+                break
+
+        if likeFlag:
+            category.likes = category.likes - 1
+            category.save()
+
+        if not dislikeFlag:
+            category.likeDislikeDefault = -1
+            category.dislikes = category.dislikes + 1
+            category.save()
+            user_profile.cats.add(category)
+
+        data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
+
+        return HttpResponse(json.dumps(data_details))
+
+
+        
+        
+        
+
+        
+
+    
