@@ -6,9 +6,9 @@ $(document).ready(function() {
         $.get('/rango/like_category/',
               {'category_id': catecategoryIdVar},
               function(newData) {
-                  var jsonData = newData;
-                  $('#like_count').html(jsonData.likeData);
-                  $('#dislike_count').html(jsonData.dislikeData);
+                  const jsonParser = JSON.parse(newData);
+                  $('#like_count').html(jsonParser.likeData);
+                  $('#dislike_count').html(jsonParser.dislikeData);
                   $('#like_btn').hide();
               })
     });

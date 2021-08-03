@@ -6,9 +6,9 @@ $(document).ready(function() {
         $.get('/rango/dislike_category/',
               {'category_id': catecategoryIdVar},
               function(newData) {
-                var jsonData = newData;
-                $('#dislike_count').html(jsonData.dislikeData);
-                $('#like_count').html(jsonData.likeData);
+                const jsonParser = JSON.parse(newData);
+                $('#dislike_count').html(jsonParser.dislikeData);
+                $('#like_count').html(jsonParser.likeData);
                 $('#dislike_btn').hide();
               })         
     });

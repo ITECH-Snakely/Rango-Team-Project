@@ -174,7 +174,7 @@ def user_login(request):
 @login_required
 def profile(request):
     return render(request, 'rango/profile.html')
-    
+
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
