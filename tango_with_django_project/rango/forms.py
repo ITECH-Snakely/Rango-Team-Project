@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from rango.models import Page, Category, UserProfile, Video
+from rango.models import Book, Page, Category, UserProfile, Video
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 
@@ -74,6 +74,6 @@ class VideoForm(forms.ModelForm):
 
         return cleaned_data
 
-        
+
         
        
