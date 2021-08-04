@@ -64,6 +64,7 @@ class VideoForm(forms.ModelForm):
         stringList = string.split('.com/')
 
         string2 = stringList[0] + ".com/embed/" + stringList[1]
+        string2 = string2.replace("watch?v=","")
         url = string2
         print(url)
         cleaned_data['url'] = url

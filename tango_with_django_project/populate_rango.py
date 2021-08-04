@@ -45,26 +45,26 @@ def populate():
     
     python_videos = [
         {'title':'Python for Beginners - Learn Python in 1 Hour',
-         'url':'https://www.youtube.com/embed/watch?v=kqtD5dpn9C8',
+         'url':'https://www.youtube.com/embed/kqtD5dpn9C8',
          'views': 13},
         {'title':'Intermediate Python Programming Course',
-         'url':'https://www.youtube.com/embed/watch?v=HGOBQPFzWKo',
+         'url':'https://www.youtube.com/embed/HGOBQPFzWKo',
          'views': 9} ]
     
     django_videos = [
         {'title':'Django Tutorial for beginners',
-         'url':'https://www.youtube.com/embed/watch?v=rHux0gMZ3Eg',
+         'url':'https://www.youtube.com/embed/rHux0gMZ3Eg',
          'views': 13},
         {'title':'Creating a website with Django',
-         'url':'https://www.youtube.com/embed/watch?v=ZsJRXS_vrw0',
+         'url':'https://www.youtube.com/embed/ZsJRXS_vrw0',
          'views': 9} ]
     
     java_videos = [
         {'title':'Java Tutorial for beginners',
-         'url':'https://www.youtube.com/embed/watch?v=eIrMbAQSU34',
+         'url':'https://www.youtube.com/embed/eIrMbAQSU34',
          'views': 83},
         {'title':'Classes and Objects',
-         'url':'https://www.youtube.com/embed/watch?v=Mm06BuD3PlY',
+         'url':'https://www.youtube.com/embed/Mm06BuD3PlY',
          'views': 19} ]
 
     quotes = {'Linus Torvalds':'Talk is cheap. Show me the code.',
