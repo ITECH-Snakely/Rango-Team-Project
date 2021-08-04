@@ -30,13 +30,18 @@ def populate():
          'url':'http://www.tangowithdjango.com/',
          'views': 1258} ]
     
-    other_pages = [
-        {'title':'Bottle',
-         'url':'http://bottlepy.org/docs/dev/',
-         'views': 54},
-        {'title':'Flask',
-         'url':'http://flask.pocoo.org',
-         'views': 64} ]
+    java_pages = [
+        {'title':'Java Tutorial',
+         'url':'https://www.tutorialspoint.com/java/index.htm',
+         'views': 45},
+        {'title':'Java for Beginners',
+         'url':'https://www.guru99.com/java-tutorial.html',
+         'views': 189},
+        {'title':'Java for kids',
+         'url':'https://www.idtech.com/blog/java-for-kids-a-guide-for-parents-of-new-coders',
+         'views': 12}
+
+    ]
     
     python_videos = [
         {'title':'Python for Beginners - Learn Python in 1 Hour',
@@ -47,18 +52,27 @@ def populate():
          'views': 9} ]
     
     django_videos = [
-        {'title':'Python for Beginners - Learn Python in 1 Hour',
-         'url':'https://www.youtube.com/embed/watch?v=kqtD5dpn9C8',
+        {'title':'Django Tutorial for beginners',
+         'url':'https://www.youtube.com/embed/watch?v=rHux0gMZ3Eg',
          'views': 13},
-        {'title':'Intermediate Python Programming Course',
-         'url':'https://www.youtube.com/embed/watch?v=HGOBQPFzWKo',
+        {'title':'Creating a website with Django',
+         'url':'https://www.youtube.com/embed/watch?v=ZsJRXS_vrw0',
          'views': 9} ]
+    
+    java_videos = [
+        {'title':'Java Tutorial for beginners',
+         'url':'https://www.youtube.com/embed/watch?v=eIrMbAQSU34',
+         'views': 83},
+        {'title':'Classes and Objects',
+         'url':'https://www.youtube.com/embed/watch?v=Mm06BuD3PlY',
+         'views': 19} ]
 
 
     
     cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64, 'videos': python_videos, 'vidviews': 128, 'vidlikes': 64},
             'Django': {'pages': django_pages, 'views': 64, 'likes': 32, 'videos': django_videos, 'vidviews': 128, 'vidlikes': 64},
-            #'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
+            'Java': {'pages': java_pages, 'views': 66, 'likes': 35, 'videos': java_videos, 'vidviews': 189, 'vidlikes': 164},
+            
     }
     
     for cat, cat_data in cats.items():
