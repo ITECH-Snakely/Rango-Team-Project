@@ -42,13 +42,7 @@
     <strong>No pages currently in category.</strong>
     {% endif %}
 
-    {% if user.is_authenticated %}
-    <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> 
-    <a href="{% url 'rango:add_video' category.slug %}">Add Video</a> <br />
-    {% endif %}
-    {% else %}
-    The specified category does not exist.
-    {% endif %}
+    
 
     <div>
         <ul>
@@ -58,4 +52,16 @@
             {% endfor %}
         </ul>
     </div>
+
+    <div>
+        <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'rango:add_page' category.slug %}">Add Page</a></li>
+        <li><a href="{% url 'rango:add_video' category.slug %}">Add Video</a></li> <br />
+        {% endif %}
+        {% else %}
+        The specified category does not exist.
+        {% endif %}
+    </ul>
+</div>
 {% endblock %}
