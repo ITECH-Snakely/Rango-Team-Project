@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rango import views
 
 app_name = 'rango'
@@ -18,4 +18,5 @@ urlpatterns = [
     path('dislike_category/', views.DislikeCategoryView.as_view(), name='dislike_category'),
     path('profile/', views.profile, name='profile'),
     path('profile/settings/', views.settings, name='settings'),
-]
+    #path('accounts/', include('allauth.urls')),
+    ]

@@ -5,11 +5,12 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from rango.models import Category, Page, Video, UserProfile, Quote
+from rango.models import Category, Page, Video, UserProfile, Quote, Book
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
-import json
-import random
+from django.contrib import auth
+import json, random
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -26,7 +27,6 @@ def index(request):
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
-    context_dict['extra'] = 'From the model solution on GitHub'
     context_dict['quote'] = obj.text
     
     visitor_cookie_handler(request)
@@ -48,13 +48,16 @@ def show_category(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
         videos = Video.objects.filter(category=category) #added
+        books = Book.objects.filter(category=category) #added
 
         context_dict['pages'] = pages
         context_dict['videos'] = videos #added
+        context_dict['books'] = books #added
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['videos'] = None
+        context_dict['books'] = None
         context_dict['category'] = None
     
     return render(request, 'rango/category.html', context=context_dict)
@@ -191,6 +194,10 @@ def restricted(request):
 @login_required
 def user_logout(request):
     logout(request)
+    auth.logout(request)
+    request.session.flush()
+    response = redirect(reverse('rango:index'))
+    response.delete_cookie('username')
     return redirect(reverse('rango:index'))
 
 def get_server_side_cookie(request, cookie, default_val=None):
@@ -316,3 +323,7 @@ def settings(request):
 
 
     return render(request, 'rango/settings.html')
+
+
+
+

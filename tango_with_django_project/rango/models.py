@@ -46,6 +46,19 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+class Book(models.Model):
+    TITLE_MAX_LENGTH = 300
+    URL_MAX_LENGTH = 200
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=TITLE_MAX_LENGTH)
+    url = models.URLField()
+    picUrl = models.URLField()
+   
+
+    def __str__(self):
+        return self.title
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(blank=True)

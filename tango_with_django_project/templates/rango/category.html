@@ -35,26 +35,33 @@
                 Dislike Category
             </button>
         {% endif %}
+
     </div>
     {% if pages %}
+    <p><strong>Websites</strong></p>
     <ul>
         {% for page in pages %}
         <li><a href="{{ page.url }}">{{ page.title }}</a></li>
         {% endfor %}
     </ul>
     {% else %}
-    <strong>No pages currently in category.</strong>
+    <strong>No pages currently in this category.</strong>
     {% endif %}
 
     
 
     <div>
+        {% if videos %}
+        <p><strong>Videos</strong></p>
         <ul>
             {% for video in videos %}
             <iframe width="350" height="196.875" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             
             {% endfor %}
         </ul>
+        {% else %}
+        <strong>No videos currently in this category.</strong>
+        {% endif %}
     </div>
 
     <div>
@@ -66,6 +73,20 @@
         {% else %}
         The specified category does not exist.
         {% endif %}
-    </ul>
-</div>
+        </ul>
+    </div>
+
+    <div>
+        {% if books %}
+        <p><strong>Books</strong></p>
+        <ul>
+            {% for book in books %}
+            <img width="202" height="250" src="{{ book.picUrl }}" alt="{{ book.title }}" />
+            <a href="{{ book.url }}" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a>
+             {% endfor %}
+        </ul> 
+        {% else %}
+        <strong>No books currently in this category.</strong>
+        {% endif %}
+    </div>
 {% endblock %}
