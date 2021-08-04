@@ -56,3 +56,12 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+class Quote(models.Model):
+    MAX_LENGTH = 500
+
+    text = models.CharField(max_length = MAX_LENGTH)
+    author = models.CharField(max_length = MAX_LENGTH)
+
+    def __str__(self):
+        return self.author

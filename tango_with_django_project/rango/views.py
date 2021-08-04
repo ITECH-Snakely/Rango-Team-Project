@@ -5,20 +5,29 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from rango.models import Category, Page, Video, UserProfile
+from rango.models import Category, Page, Video, UserProfile, Quote
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
 import json
+import random
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
+
+    ranNum = random.randint(1,5)
+    obj = Quote.objects.get(id=ranNum)
+
+
+    print(ranNum)
+    print(obj.text)
 
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
     context_dict['extra'] = 'From the model solution on GitHub'
+    context_dict['quote'] = obj.text
     
     visitor_cookie_handler(request)
 
@@ -286,7 +295,7 @@ def profile(request):
     number_user = current_user.id
     email_user = current_user.email
 
-    obj = UserProfile.objects.get(id=number_user)
+    obj = UserProfile.objects.get(id=number_user-1)
     context = {
     'name': obj.user,
     'id': obj.id,

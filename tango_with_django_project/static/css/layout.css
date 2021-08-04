@@ -86,6 +86,10 @@ a.footer:visited{
     color:#75B2AD
 }
 
+a {
+    color:#333333
+}
+
 a:hover{
     opacity: 0.6;
 }
