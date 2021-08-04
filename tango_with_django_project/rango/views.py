@@ -283,7 +283,7 @@ class DislikeCategoryView(View):
 
 def profile(request):
     current_user = request.user
-    number_user = current_user.id-1
+    number_user = current_user.id
     email_user = current_user.email
 
     obj = UserProfile.objects.get(id=number_user)
