@@ -10,7 +10,11 @@
 <h1 id=greenmark> Settings </h1>
 <div class='parent'>
     <div class='child'>
+        {% if picture %}
         <img class= profilePIC src="{{ MEDIA_URL }}{{ picture }}" alt="Profile Picture" />
+        {% else %}
+        <img class= profilePIC src="{% static 'images/basic_circle.jpg' %}" alt="Vector Profile Picture" />
+        {% endif %}
     </div>
     <div class='child'>
         <ul>
