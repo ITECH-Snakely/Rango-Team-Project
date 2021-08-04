@@ -1,0 +1,40 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Settings
+{% endblock %}
+
+{% block body_block %}
+<div >
+    <h1 class = titleCon >Rango says...</h1>
+    <h1 id = greenmark>"Settings"</h1>
+</div>
+<form id="login_form" method="post" action="{% url 'rango:login' %}">
+    {% csrf_token %}
+    Username <br /> <input type="text" name="username" value="" size="50" />
+    <p class = loginText>Required. 150 characters or fewer</p>
+    <input type="submit" value="Change Username" />
+    <br />
+    <br />
+    Email <br /> <input type="email" name="email" value="" size="50" />
+    <p class = loginText>Required. 150 characters or fewer</p>
+    <input type="submit" value="Change password" />
+    <br />
+    <br />
+    Password <br /> <input type="password" name="password" value="" size="50" />
+    <p class = loginText>Required. 150 characters or fewer</p>
+    <input type="submit" value="Change email" />
+    <br />
+    <br />
+    Website <br /> <input type="url" name="website" value="" size="50" />
+    <input type="submit" value="Change website" />
+    <br />
+    <br />
+    Profile Photo
+    <br />
+    <button> CHANGE </button>
+    <br />
+</form>
+<button class = deleteButton> DELETE ACCOUNT </button>
+{% endblock %}

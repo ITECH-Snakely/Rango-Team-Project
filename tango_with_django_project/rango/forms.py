@@ -8,6 +8,8 @@ class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH, help_text="Please enter the category name.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    dislikes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    likeDislikeDefault = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
@@ -38,12 +40,12 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password',)
+        fields = ('username', 'password',)
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('website', 'picture',)
+        fields = ('email','website', 'picture',)
 
 class VideoForm(forms.ModelForm):
     title = forms.CharField(max_length=Video.TITLE_MAX_LENGTH, help_text="Please enter the title of the video.")
