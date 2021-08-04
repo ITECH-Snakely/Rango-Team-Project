@@ -68,8 +68,8 @@
     <div>
         <ul>
             {% for book in books %}
-            <img src="{{ book.picUrl }}" alt="{{ book.title }}" />
-             <a href="{{ book.url }}" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a>
+            <img width="202" height="250" src="{{ book.picUrl }}" alt="{{ book.title }}" />
+            <a href="{{ book.url }}" target="_blank" rel="noopener noreferrer" style="border:none;text-decoration:none"><img src="https://www.niftybuttons.com/amazon/amazon-button2.png"></a>
              {% endfor %}
         </ul> 
     </div>

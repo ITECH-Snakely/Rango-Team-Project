@@ -73,17 +73,37 @@ def populate():
          'url':'https://www.amazon.co.uk/Python-Crash-Course-2nd-Edition/dp/1593279280/ref=sr_1_4?dchild=1&keywords=python&qid=1628085495&sr=8-4',
          'picUrl': MEDIA_URL + 'Python_crashcourse.jpg',
          'views': 19},
-        #{'title':'Classes and Objects',
-        # 'url':'https://www.youtube.com/embed/watch?v=Mm06BuD3PlY',
-        # 'picUrl':'https://www.youtube.com/embed/watch?v=eIrMbAQSU34',
-        # 'views': 19} ]
-    ]
+        {'title':'Python for kids',
+         'url':'https://www.amazon.co.uk/Coding-Kids-Python-Awesome-Activities/dp/1641521759/ref=sr_1_3?dchild=1&keywords=python+for+kids&qid=1628103737&sr=8-3',
+         'picUrl': MEDIA_URL + 'Python_for_kids.jpg',
+         'views': 19} ]
+    
+    java_books= [
+        {'title':'Java for Dummies',
+         'url':'https://www.amazon.co.uk/Java-All-One-Dummies-Computer/dp/111968045X/ref=sr_1_9?crid=20VBU6B9GI5CT&dchild=1&keywords=java+programming&qid=1628104162&sprefix=java+pro%2Caps%2C186&sr=8-9',
+         'picUrl': MEDIA_URL + 'Java_dummies.jpg',
+         'views': 19},
+        {'title':'Learning Java',
+         'url':'https://www.amazon.co.uk/Learning-Java-Introduction-Real-World-Programming/dp/1492056278/ref=sr_1_10?crid=20VBU6B9GI5CT&dchild=1&keywords=java+programming&qid=1628104264&sprefix=java+pro%2Caps%2C186&sr=8-10',
+         'picUrl': MEDIA_URL + 'Learning_java.jpg',
+         'views': 19} ]
+
+    django_books= [
+        {'title':'Building Websites with Django',
+         'url':'https://www.amazon.co.uk/Building-Websites-Django-professional-programming/dp/9389328284/ref=sr_1_1_sspa?crid=34F1LSSCAPWSS&dchild=1&keywords=django+programming&qid=1628103921&sprefix=Django+pro%2Caps%2C188&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEySUk4MEtBUlBSQzlaJmVuY3J5cHRlZElkPUEwNTA0OTY0WFNKWTdONE5YSkpNJmVuY3J5cHRlZEFkSWQ9QTA3NDkyNzczSFE0RjRPUUE0TjdWJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==',
+         'picUrl': MEDIA_URL + 'Building_web_django.jpg',
+         'views': 32},
+        {'title':'Django for Beginners',
+         'url':'https://www.amazon.co.uk/Django-Beginners-Build-Websites-Python/dp/1735467200/ref=sr_1_5?crid=34F1LSSCAPWSS&dchild=1&keywords=django+programming&qid=1628104025&sprefix=Django+pro%2Caps%2C188&sr=8-5',
+         'picUrl': MEDIA_URL + 'Django_beginners.jpg',
+         'views': 18} ]
+    
 
 
     
     cats = {'Python': {'pages': python_pages, 'views': 128, 'likes': 64, 'videos': python_videos, 'vidviews': 128, 'vidlikes': 64, 'books': python_books, 'boviews': 128, 'bolikes': 64},
-            'Django': {'pages': django_pages, 'views': 64, 'likes': 32, 'videos': django_videos, 'vidviews': 128, 'vidlikes': 64, 'books': python_books, 'boviews': 128, 'bolikes': 64},
-            'Java': {'pages': java_pages, 'views': 66, 'likes': 35, 'videos': java_videos, 'vidviews': 189, 'vidlikes': 164, 'books': python_books, 'boviews': 128, 'bolikes': 64},
+            'Django': {'pages': django_pages, 'views': 64, 'likes': 32, 'videos': django_videos, 'vidviews': 128, 'vidlikes': 64, 'books': django_books, 'boviews': 128, 'bolikes': 64},
+            'Java': {'pages': java_pages, 'views': 66, 'likes': 35, 'videos': java_videos, 'vidviews': 189, 'vidlikes': 164, 'books': java_books, 'boviews': 128, 'bolikes': 64},
             
     }
     
