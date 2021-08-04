@@ -9,6 +9,8 @@ from rango.models import Category, Page, Video, UserProfile
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
 import json
+from django.contrib import auth
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -182,6 +184,10 @@ def restricted(request):
 @login_required
 def user_logout(request):
     logout(request)
+    auth.logout(request)
+    request.session.flush()
+    response = redirect(reverse('rango:index'))
+    response.delete_cookie('username')
     return redirect(reverse('rango:index'))
 
 def get_server_side_cookie(request, cookie, default_val=None):
