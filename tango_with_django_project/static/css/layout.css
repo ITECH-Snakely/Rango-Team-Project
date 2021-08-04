@@ -5,6 +5,7 @@ body {
     font-weight: bold;
     font-size: 24 px;
     letter-spacing: 0.20em;
+    text-align: center;
 }
 
 #page {
@@ -13,6 +14,10 @@ body {
     margin: 10px auto 10px auto;
     padding: 20px
     border
+}
+
+p {
+    text-justify: inter-word;
 }
 
 .blocklist1, .blocklist2{
@@ -166,6 +171,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
 
 
 .titleCon{
+    margin-top: 80px;
     margin-bottom: -20px;
 }
 
@@ -191,4 +197,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
     width: 260px;
     height: 260px;
     border-radius: 6px;
+}
+
+img.github{
+    width: 10%;
+    margin-top: 8px;
+    margin-bottom: 8px
 }

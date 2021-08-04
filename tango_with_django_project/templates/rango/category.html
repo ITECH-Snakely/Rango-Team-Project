@@ -11,7 +11,11 @@
 
 {% block body_block %}
     {% if category %}
-    <h1>{{ category.name }}</h1> <br />
+    <div>
+        <h1 class = titleCon >Category: </h1>
+        <h1 id=greenmark>{{ category.name }}</h1> <br />
+    </div>
+    
     <div>
         <strong id="like_count">{{ category.likes }}</strong> likes
         {% if user.is_authenticated %}
@@ -47,7 +51,7 @@
     <div>
         <ul>
             {% for video in videos %}
-            <iframe width="280" height="157.5" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="350" height="196.875" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             
             {% endfor %}
         </ul>

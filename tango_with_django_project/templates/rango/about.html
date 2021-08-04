@@ -9,18 +9,33 @@
 <h1 class=titleCon>Rango says...</h1>
 <h1 id=greenmark>"Welcome to the about page"</h1>
 <div>
-    <p><strong>Our Mission: </strong><br /></p>
-    Snakely’s mission is to create a platform that improves the daily lives of users when learning to program.
-    The website will allow users to view videos and tutorials, add content, and learn new skills thanks to the site’s list of features.
-    Learning doesn’t have to be complicated, and it shouldn’t be scary.
-    Snakely will create a user-friendly site which will provide a fun learning experience
-    <p><strong>Created by:</strong><br /></p>
-    Karim Altom,
-    Nicholas Lhoest,
-    Ewa Wanat and
-    Clarissa Wilkie
+    <h2><strong>Our Mission: </strong></h2>
+
+    <p>
+        Snakely’s mission is to create a platform that improves the daily lives of users when learning to program.
+    </p>
+    <p>
+        The website will allow users to view videos and tutorials, add content, and learn new skills thanks to the site’s list of features.
+        Learning doesn’t have to be complicated, and it shouldn’t be scary.
+    </p>
+    <p>
+        Snakely will create a user-friendly site which will provide a fun learning experience
+    </p>
+    
+    <br />
+    <h2><strong>Created by:</strong></h2>
+    <p class = loginText>View our GitHub to See more</p>
+    <div >
+        <img class=github src = "{% static 'images/github.png' %}"> 
+    </div>
+    <ul>
+        <li><a href= https://github.com/KarimTom>Karim Altom</a> </li>
+        <li><a href= https://github.com/nicholaslhoest>Nicholas Lhoest</a></li>
+        <li><a href= https://github.com/ewawanat>Ewa Wanat</a></li>
+        <li><a href= https://github.com/Clarissa-M>Clarissa Wilkie</a></li>
+    </ul>
+
     <p>Visits: {{ visits }}</p>
 </div>
-<img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
-<img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
+<img src="{% static 'images/mission.png' %}" alt="Picture of Team Mission" />
 {% endblock %}
