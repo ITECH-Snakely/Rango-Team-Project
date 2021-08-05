@@ -105,7 +105,7 @@ def populate():
     }
 
     quotes = {'Linus Torvalds':'Talk is cheap. Show me the code.',
-        'Kent Beck':'I`m not a great programmer; I`m just a good programmer with great habits.',
+        'Kent Beck':'I\'m not a great programmer; I\'m just a good programmer with great habits.',
         'Robert C. Martin':'Truth can only be found in one place: the code.',
         'Stephen Hawking':'Whether you want to uncover the secrets of the universe, or you just want to pursue a career in the 21st century, basic computer programming is an essential skill to learn.',
         'Steve Jobs':'Everybody should learn to program a computer, because it teaches you how to think.'}
