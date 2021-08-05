@@ -1,6 +1,8 @@
+from django.contrib.sites.models import Site
+from django.contrib import auth
 from django.views import View
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -18,7 +20,6 @@ def index(request):
     ranNum = random.randint(1,5)
     obj = Quote.objects.get(id=ranNum)
 
-
     print(ranNum)
     print(obj.text)
 
@@ -30,7 +31,6 @@ def index(request):
     context_dict['quote'] = obj.text
     
     visitor_cookie_handler(request)
-
     return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
@@ -191,6 +191,10 @@ def restricted(request):
 @login_required
 def user_logout(request):
     logout(request)
+    auth.logout(request)
+    request.session.flush()
+    response = redirect(reverse('rango:index'))
+    response.delete_cookie('username')
     return redirect(reverse('rango:index'))
 
 def get_server_side_cookie(request, cookie, default_val=None):
@@ -289,6 +293,16 @@ class DislikeCategoryView(View):
         data_details = {'likeData' : category.likes, 'dislikeData' : category.dislikes}
 
         return HttpResponse(json.dumps(data_details)) 
+
+class GenerateQuoteView(View):
+    def get(self, request):
+        ranNum = random.randint(1,5)
+        selectedQuote = Quote.objects.get(id=ranNum).text
+        
+        print(selectedQuote)
+
+        return HttpResponse(selectedQuote)
+
 
 def profile(request):
     current_user = request.user

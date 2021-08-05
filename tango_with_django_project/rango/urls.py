@@ -16,6 +16,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('like_category/', views.LikeCategoryView.as_view(), name='like_category'),
     path('dislike_category/', views.DislikeCategoryView.as_view(), name='dislike_category'),
+    path('generate_quote/', views.GenerateQuoteView.as_view(), name='generate_quote/'),
     path('profile/', views.profile, name='profile'),
     path('profile/settings/', views.settings, name='settings'),
 ]

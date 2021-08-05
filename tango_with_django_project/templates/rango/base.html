@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load rango_template_tags %}
+{% load socialaccount %}
 
 <html>
     <head lang="en">
@@ -35,6 +36,7 @@
                 {% else %}
                     <li class=footer><a href="{% url 'rango:register' %}" class=footer>Sign Up</a></li>
                     <li class=footer><a href="{% url 'rango:login' %}" class=footer>Login</a></li>
+                    <li class=footer></li><a href="{% provider_login_url 'google' %}">Login With Google</a></li>
                 {% endif %}
                     <li class=footer><a href="{% url 'rango:about' %}" class=footer>About</a></li>
                     <li class=footer><a href="{% url 'rango:index' %}" class=footer>Home</a></li>
@@ -44,5 +46,6 @@
     <script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
     <script src="{% static "js/rango-likeButton.js" %}" crossorigin="anonymous"></script>
     <script src="{% static "js/rango-dislikeButton.js" %}" crossorigin="anonymous"></script>
+    <script src="{% static "js/rango-generateQuote.js" %}" crossorigin="anonymous"></script>
     </body>
 </html>
