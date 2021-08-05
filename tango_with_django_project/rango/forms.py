@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from rango.models import Page, Category, UserProfile, Video
+from rango.models import Book, Page, Category, UserProfile, Video
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 
@@ -64,6 +64,7 @@ class VideoForm(forms.ModelForm):
         stringList = string.split('.com/')
 
         string2 = stringList[0] + ".com/embed/" + stringList[1]
+        string2 = string2.replace("watch?v=","")
         url = string2
         print(url)
         cleaned_data['url'] = url
@@ -73,3 +74,7 @@ class VideoForm(forms.ModelForm):
             cleaned_data['url'] = url 
 
         return cleaned_data
+
+
+        
+       

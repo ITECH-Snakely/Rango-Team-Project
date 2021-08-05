@@ -1,5 +1,5 @@
 {% extends 'rango/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title_block %}
     Profile Page
@@ -18,11 +18,13 @@
     </div>
     <div class='child'>
         <ul>
-            <li class=profile> Username: {{ name }} </li>
-            <li class=profile> Email: {{ email }} </li>
-            <li class=profile> Website: {{ website }} </li>
-            <li> <a href = ../profile/settings/> SETTINGS </a> </li>
+            <li class=profile> {{ name }} </li>
+            <li class=profile> {{ email }} </li>
+            <li class=profile> <a href = "{{website}}" target="_blank">{{ website }}</a> </li>
         </ul>
     </div>
-  </div>
+    <li style="margin-bottom:100px"><a href = ../profile/settings/> SETTINGS </a></li>
+    
+</div>
+
 {% endblock %}

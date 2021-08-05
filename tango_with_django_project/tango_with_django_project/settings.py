@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-]
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,6 +79,9 @@ TEMPLATES = [
         },
     },
 ]
+
+#LOGIN_REDIRECT_URL = '/'
+#LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
@@ -153,6 +159,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
