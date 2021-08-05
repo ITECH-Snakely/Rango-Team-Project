@@ -130,7 +130,7 @@ form{
     margin: 60px auto 0px auto;
 }
 
-input[type= "submit"]{
+input[type= "submit"], #like_btn, #dislike_btn{
  color: white;
  font-weight:400;
  letter-spacing: 3px;

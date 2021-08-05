@@ -15,6 +15,7 @@ import json, random
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
+    video_list = Video.objects.order_by('-views')[:10]
 
     ranNum = random.randint(1,5)
     obj = Quote.objects.get(id=ranNum)
@@ -27,6 +28,7 @@ def index(request):
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
+    context_dict['videos'] = video_list
     context_dict['quote'] = obj.text
     
     visitor_cookie_handler(request)
