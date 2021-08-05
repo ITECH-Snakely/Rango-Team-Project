@@ -9,23 +9,30 @@
 <h1 class = titleCon>Rango says...</h1>
 <div id=greenmark>
     <br />
+
     <h1 id="quote_display">{{ quote }}"</h1> <br />
     <button id="quote_generator"
                 class="btn btn-primary btn-sm"
                 type="button">
                 Display another quote
             </button>
+
 </div>
 
 <div>
     {% if user.is_authenticated %}
-        howdy {{ user.username }}!
+       <h3> Hi <span class=green> {{ user.username }} </span> </h3> 
     {% else %}
-        hey there partner!
+    <p > Welcome New Learner </p>
     {% endif %}
 </div>
+<div class = googleBar>
+    <h2>Rango Search</h2>
+    <p class = loginText> Search for educational materials</p>
     <script async src="https://cse.google.com/cse.js?cx=41788f5810073ee7d"></script>
     <div class="gcse-search"></div> 
+</div>
+    
 <div>
 <div class=blocklist1>
     <h2>Most Liked Categories</h2>
@@ -50,6 +57,20 @@
     </ul>
 {% else %}
     <strong>There are no pages present.</strong>
+{% endif %}
+</div>
+
+
+<div>
+    <h2>Most Viewed Videos</h2>
+{% if videos %}
+    <ul>
+    {% for video in videos %}
+    <iframe style = "padding:10px" width="350" height="196.875" src="{{ video.url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% endfor %}
+    </ul>
+{% else %}
+    <strong>There are no video present.</strong>
 {% endif %}
 </div>
 

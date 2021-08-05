@@ -8,6 +8,7 @@
 {% block body_block %}
 <h1>Login to</h1>
 <h1 id=greenmark>get started</h1>
+<img src="{% static 'images/lock.png' %}" width = 30% alt="Picture of Team Learning" />
 <form id="login_form" method="post" action="{% url 'rango:login' %}">
     {% csrf_token %}
     Username <br /> <input type="text" name="username" value="" size="50" />

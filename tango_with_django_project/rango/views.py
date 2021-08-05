@@ -7,15 +7,17 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from rango.models import Category, Page, Video, UserProfile, Quote
+from rango.models import Category, Page, Video, UserProfile, Quote, Book
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, VideoForm
 from datetime import datetime
-import json
-import random
+from django.contrib import auth
+import json, random
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     page_list = Page.objects.order_by('-views')[:5]
+    video_list = Video.objects.order_by('-views')[:10]
 
     ranNum = random.randint(1,5)
     obj = Quote.objects.get(id=ranNum)
@@ -27,9 +29,9 @@ def index(request):
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
-    context_dict['extra'] = 'From the model solution on GitHub'
+    context_dict['videos'] = video_list
     context_dict['quote'] = obj.text
-    
+
     visitor_cookie_handler(request)
     return render(request, 'rango/index.html', context=context_dict)
 
@@ -48,13 +50,16 @@ def show_category(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
         videos = Video.objects.filter(category=category) #added
+        books = Book.objects.filter(category=category) #added
 
         context_dict['pages'] = pages
         context_dict['videos'] = videos #added
+        context_dict['books'] = books #added
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['videos'] = None
+        context_dict['books'] = None
         context_dict['category'] = None
     
     return render(request, 'rango/category.html', context=context_dict)
@@ -324,9 +329,12 @@ def profile(request):
 @login_required
 def settings(request):
     if request.method == 'POST':
-        my_record = UserProfile.objects.get(id = request.user.id-1)
-        form = UserProfile(instance=my_record)
+        UserProfile.objects.get(user=request.user).delete()
 
-
+        return redirect(request, 'rango/index.html')
 
     return render(request, 'rango/settings.html')
+
+
+
+

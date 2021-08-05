@@ -6,16 +6,55 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Register for Rango</h1>
+<h1>Rango Says...</h1>
 {% if registered %}
-Rango says: <strong>thank you for registering!</strong>
+<h1><strong>thank you for registering!</strong></h1>
 <a href="{% url 'rango:index' %}">Return to the homepage.</a><br />
 {% else %}
-Rango says: <strong id= greenmark>register here!</strong><br />
+ <h1><strong id= greenmark>register here!</strong></h1><br />
+<img src="{% static 'images/gears.png' %}" width = 50% alt="Picture of gears" />
 <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+
+    <div class="fieldWrapper">
+        {{ form.username.errors }}
+        <label for="{{ form.user_form.id_username}}">Username</label> <br />
+        {{ form.username }}
+        <input type="text" name="username" required id = "id_username" value="" size="50" />
+        <p class = loginText> *Required </p> <br />
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.password.errors }}
+        <label for="{{ form.user_form.id_password}}">Password</label> <br />
+        {{ form.password }}
+        <input type="password" name="password" required id = "id_password" value="" size="50" />
+        <p class = loginText> *Required </p> <br />
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.email.errors }}
+        <label for="{{ form.user_form.id_email}}">Email</label> <br />
+        {{ form.email }}
+        <input type="email" name="email" value="" size="50" id="id_email"/>
+        <p class = loginText> *Optional </p> <br />
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.website.errors }}
+        <label for="{{ form.user_form.id_website}}">Website</label> <br />
+        {{ form.website }}
+        <input type="url" name="website" value="" size="50" id="id_website"/>
+        <p class = loginText> *Optional, Include (http://) at the beginning </p> <br />
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.picture.errors }}
+        <label for="{{ form.user_form.id_picture}}">Picture</label> <br />
+        {{ form.picture }}
+        <input type="file" name="picture" value="" accept = "image/*" id="id_picture" size="50" id="id_website"/>
+        <p class = loginText> *Optional </p> <br />
+    </div>
 
     <input type="submit" name="submit" value="Register" />
 </form>

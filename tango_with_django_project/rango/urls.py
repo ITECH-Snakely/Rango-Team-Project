@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rango import views
 
 app_name = 'rango'
@@ -19,4 +19,5 @@ urlpatterns = [
     path('generate_quote/', views.GenerateQuoteView.as_view(), name='generate_quote/'),
     path('profile/', views.profile, name='profile'),
     path('profile/settings/', views.settings, name='settings'),
-]
+    #path('accounts/', include('allauth.urls')),
+    ]
