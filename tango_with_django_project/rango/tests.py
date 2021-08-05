@@ -1,6 +1,8 @@
 from operator import truediv
 from os import name
+from rango.forms import CategoryForm
 from django.db.utils import IntegrityError
+from django.core import validators
 from django.test import TestCase
 from django.urls import reverse
 import datetime as dt
@@ -40,13 +42,9 @@ class CategoryMethodTests(TestCase):
         When the exception is caught the testFailedCheck flips.
         """
         testFailedCheck = False
-
-        try:
-            test = Category.objects.create(name='n', views=0, likes=-1, dislikes=-1, likeDislikeDefault=0, slug=str(random.randint(0, 100000000000000000)))
-        except IntegrityError:
-            testFailedCheck = True
-        
-        self.assertTrue(testFailedCheck)
+        category_params = {'name': 'n', 'views': -1, 'likes': -1, 'dislikes': -2, 'likesDislikesDefault': 0, 'slug': str(random.randint(1, 1000))}
+        cat = CategoryForm(category_params)
+        self.assertFalse(cat.is_valid())
 
 class QuoteChecker(TestCase):
     """

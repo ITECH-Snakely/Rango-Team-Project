@@ -1,19 +1,21 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 
 class Category(models.Model):
     NAME_MAX_LENGTH = 128
     
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.PositiveIntegerField(default=0)
-    dislikes = models.PositiveIntegerField(default=0)
+    views = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
+    likes = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
+    dislikes = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
     likeDislikeDefault = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.full_clean()
         super(Category, self).save(*args, **kwargs)
 
     class Meta:

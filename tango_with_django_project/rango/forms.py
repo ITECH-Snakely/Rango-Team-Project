@@ -1,14 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
 from rango.models import Book, Page, Category, UserProfile, Video
+from django.core.validators import MinValueValidator
 
 # We could add these forms to views.py, but it makes sense to split them off into their own file.
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=Category.NAME_MAX_LENGTH, help_text="Please enter the category name.")
-    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    dislikes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0, validators=[MinValueValidator(0)])
+    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0, validators=[MinValueValidator(0)])
+    dislikes = forms.IntegerField(widget=forms.HiddenInput(), initial=0, validators=[MinValueValidator(0)])
     likeDislikeDefault = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 

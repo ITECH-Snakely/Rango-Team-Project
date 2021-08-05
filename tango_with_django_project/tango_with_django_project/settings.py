@@ -134,7 +134,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-SITE_ID = 7
+SITE_ID = 8
 
 LOGIN_REDIRECT_URL = '/rango'
 LOGOUT_REDIRECT_URL = '/'
