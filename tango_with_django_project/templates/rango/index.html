@@ -10,16 +10,23 @@
 <div id=greenmark>
     <br />
     <h1> "{{ quote }}"</h1>
+    <br />
 </div>
 
 <div>
     {% if user.is_authenticated %}
-        Hi {{ user.username }} you are logged in!
-    
+       <h3> Hi <span class=green> {{ user.username }} </span> </h3> 
+    {% else %}
+    <p > Welcome New Learner </p>
     {% endif %}
 </div>
+<div class = googleBar>
+    <h2>Rango Search</h2>
+    <p class = loginText> Search for educational materials</p>
     <script async src="https://cse.google.com/cse.js?cx=41788f5810073ee7d"></script>
     <div class="gcse-search"></div> 
+</div>
+    
 <div>
 <div class=blocklist1>
     <h2>Most Liked Categories</h2>

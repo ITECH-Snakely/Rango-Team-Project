@@ -70,6 +70,12 @@ a:link {
 
 #greenmark{
     color:#75B2AD;
+    margin-bottom: -20px;
+}
+
+.green{
+    color:#75B2AD;
+    font-size: 24px
 }
 
 /*Footer Setting*/
@@ -131,11 +137,16 @@ input[type= "submit"]{
  text-transform: uppercase;
  background-color: #75B2AD;
  border-color: transparent;
- padding: 10px 80px 10px 60px;
+ padding: 10px 60px 10px 60px;
  margin: 20px 20px 20px 0px;
  border-radius: 2px;
  text-align: center;
+ transition: 1s;
 }
+
+input[type= "submit"]:hover{
+    opacity: 0.4;
+   }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="url"] {
     border-color: transparent;
@@ -145,7 +156,6 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
     vertical-align: middle;
 }
 
-
 /* Profile View */
 .parent {
     margin: 1rem;
@@ -153,7 +163,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
   }
   .child {
     display: inline-block;
-    padding: 20px;
+    padding: 10px;
     vertical-align: middle;
     
   }
@@ -161,6 +171,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
 .profile{
     background-color: transparent;
     text-align: left;
+    font-size: 28px;
 
 }
 
@@ -197,6 +208,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
     width: 260px;
     height: 260px;
     border-radius: 6px;
+    padding:0px;
+    background-color:#75B2AD;
 }
 
 img.github{
@@ -204,3 +217,60 @@ img.github{
     margin-top: 8px;
     margin-bottom: 8px
 }
+
+div.googleBar {
+    padding: 100px auto 100px auto;
+    margin: 100px auto 100px auto;
+}
+
+div.googleBar button{
+    background-color: #75B2AD
+}
+
+div.googleBar button:hover{
+    background-color: #75B2AD;
+    opacity: 0.5
+}
+
+.catBox{
+    margin: 80px auto 15px auto;
+}
+
+.bookBlock {
+    display: inline-grid;
+    margin: -10px 40px 0px 40px;
+}
+
+.nopad {
+    margin: -20px;
+}
+
+
+input[type="file"]{
+    border-color: transparent;
+    margin: 10px auto 10px auto;
+    padding: 6px 1px 2px 1px;
+    font-size: 18px;
+    vertical-align: middle;
+
+}
+
+input[type="file"]::file-selector-button{
+   background-color:#75B2AD;
+   color: white;
+   font-weight:400;
+   letter-spacing: 3px;
+   text-transform: uppercase;
+   background-color: #75B2AD;
+   border-color: transparent;
+   padding: 10px 60px 10px 60px;
+   border-radius: 2px;
+   text-align: center;
+   transition: 1s;
+}
+
+input[type="file"]::file-selector-button:hover{
+    opacity: 0.4;
+ }
+
+

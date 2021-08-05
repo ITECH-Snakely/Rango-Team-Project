@@ -317,10 +317,9 @@ def profile(request):
 @login_required
 def settings(request):
     if request.method == 'POST':
-        my_record = UserProfile.objects.get(id = request.user.id-1)
-        form = UserProfile(instance=my_record)
+        UserProfile.objects.get(user=request.user).delete()
 
-
+        return redirect(request, 'rango/index.html')
 
     return render(request, 'rango/settings.html')
 
